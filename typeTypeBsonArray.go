@@ -10,8 +10,10 @@ import (
 // Arrays
 // The array schema type configures the content of array fields.
 // For more information, see the official JSON Schema array guide.
-// https://json-schema.org/understanding-json-schema/reference/array.html
+// https://www.mongodb.com/blog/post/json-schema-validation--checking-your-arrays
+// https://www.mongodb.com/blog/post/mongodb-36-json-schema-validation-expressive-query-syntax
 // https://www.mongodb.com/blog/post/json-schema-validation--locking-down-your-model-the-smart-way
+// https://studio3t.com/knowledge-base/articles/json-schema-mongodb/
 //
 //   Example:
 //   {
