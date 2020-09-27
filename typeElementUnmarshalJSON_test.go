@@ -543,6 +543,30 @@ func ExampleElement_UnmarshalJSON() {
                   "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
                 }
               }
+            },
+            "additionalProperties": {
+              "bsonType": "array",
+              "items": {
+                "title": "sub schema",
+                "bsonType": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "title": {
+                    "bsonType": "string",
+                    "title": "title",
+                    "description": "'title' is a required string",
+                    "enum": ["Dr.", "Dra.", null]
+                  },
+                  "name": {
+                    "bsonType": "string",
+                    "title": "name text",
+                    "description": "'name' is an optional boolean value",
+                    "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
+                  }
+                }
+              }
             }
           },
           "graduated": {

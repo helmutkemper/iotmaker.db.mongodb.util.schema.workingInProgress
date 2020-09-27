@@ -2,7 +2,6 @@ package iotmakerdbmongodbutilschema
 
 import (
 	"errors"
-	"reflect"
 	"strconv"
 	"strings"
 )
@@ -190,10 +189,10 @@ func (el *TypeBsonArray) Populate(schema map[string]interface{}) (err error) {
 		return
 	}
 
-	el.getPropertyAdditionalItens(schema)
-
-	//todo: AdditionalItems
-	//todo: UniqueItems
+	el.AdditionalItemsBoolIsSet, el.AdditionalItemsBoolValue, el.AdditionalItemsMap, err = el.getPropertyAdditionalItens(schema)
+	if err != nil {
+		return
+	}
 
 	return
 }
@@ -314,21 +313,31 @@ func (el *TypeBsonArray) getPropertyAdditionalItens(schema map[string]interface{
 	case map[string]interface{}:
 		boolValue = false
 		boolIsSet = false
-		itemsMap = value.(map[string]map[string]BsonType)
-	}
 
-	if reflect.ValueOf(value).Kind() == reflect.Bool {
-		boolValue = value.(bool)
-		boolIsSet = true
-		return
-	}
-
-	if reflect.ValueOf(value).Kind() == reflect.String {
-		boolValue, err = strconv.ParseBool(strings.ToLower(value.(string)))
-		if err == nil {
-			boolIsSet = true
+		var newSchemaMap = make(map[string]interface{})
+		var element Element
+		var key string
+		newSchemaMap = element.filterSchemaElements(schema["additionalProperties"].(map[string]interface{})["items"].(map[string]interface{}))
+		newSchemaMap, found = newSchemaMap["properties"].(map[string]interface{})
+		if found == false {
+			err = errors.New("bsonType 'array' has key 'additionalProperties', but not has key 'additionalProperties.properties'")
+			return
 		}
-		return
+
+		for schemaCellKey, schemaCell := range newSchemaMap {
+			var typesInCell []string
+			typesInCell, err = element.getPropertyBsonType(schemaCell.(map[string]interface{}))
+
+			for _, currentType := range typesInCell {
+				if key != "" {
+					schemaCellKey = key + "." + schemaCellKey
+				}
+				err = element.typeStringToTypeObjectPopulated(&itemsMap, schemaCellKey, currentType, schemaCell.(map[string]interface{}))
+				if err != nil {
+					return
+				}
+			}
+		}
 	}
 
 	return
