@@ -47,11 +47,13 @@ type TypeBsonObject struct {
 	// document.
 	// If the value is a schema object, any additional fields must validate against the
 	// schema
-	AdditionalProperties AdditionalProperties
+	AdditionalPropertiesBoolIsSet bool
+	AdditionalPropertiesBoolValue bool
+	AdditionalPropertiesMap       map[string]map[string]BsonType
 
 	// Specify property and schema dependencies.
 	// https://www.mongodb.com/blog/post/json-schema-validation--dependencies-you-can-depend-on
-	Dependencies map[string]Element
+	Dependencies map[string]map[string]BsonType
 }
 
 func (el *TypeBsonObject) getTypeString() string {
