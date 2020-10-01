@@ -156,12 +156,21 @@ func (el *TypeBsonObject) populateRequiredSupport(requiredPointer *map[string]bo
 
 func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 
+	err = el.verifyParent(value)
+	if err != nil {
+		return
+	}
+
 	err = el.verifyMaxProperties()
 	if err != nil {
 		return
 	}
 
 	err = el.verifyMinProperties()
+	if err != nil {
+		return
+	}
+
 	return
 }
 
