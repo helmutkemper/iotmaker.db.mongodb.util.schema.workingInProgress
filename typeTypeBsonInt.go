@@ -42,6 +42,9 @@ type TypeBsonInt struct {
 	// If true, the field value must be strictly greater than the minimum value.
 	// If false, the field value may also be equal to the minimum value.
 	ExclusiveMinimum bool
+
+	Properties map[string]map[string]BsonType
+	Required   map[string]bool
 }
 
 func (el *TypeBsonInt) Verify(value interface{}) (err error) {

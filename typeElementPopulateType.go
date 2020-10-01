@@ -19,15 +19,15 @@ func (el *Element) slicerAndAssemblerForBsonType(schema map[string]interface{}) 
 			return
 		}
 
-		err = el.typeStringToTypeObjectPopulated(&el.Properties, "", value.(string), schema)
+		err = el.typeStringToTypeObjectPopulated(&el.Properties, "main", value.(string), schema)
 		if err != nil {
 			return
 		}
 
-		err = el.populateRequired("", value.(string), schema)
-		if err != nil {
-			return
-		}
+		//err = el.populateRequired("main", value.(string), schema)
+		//if err != nil {
+		//	return
+		//}
 
 		err = el.populateDependencies(schema)
 		if err != nil {

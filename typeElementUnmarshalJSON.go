@@ -17,10 +17,15 @@ func (el *Element) UnmarshalJSON(data []byte) (err error) {
 
 	schema = el.filterSchemaElements(schema)
 
-	err = el.slicerAndAssemblerForBsonType(schema)
+	err = el.Populate(schema)
 	if err != nil {
 		return
 	}
+
+	//err = el.slicerAndAssemblerForBsonType(schema)
+	//if err != nil {
+	//	return
+	//}
 
 	//err = el.populateRequired("", schema)
 	//if err != nil {
@@ -30,16 +35,19 @@ func (el *Element) UnmarshalJSON(data []byte) (err error) {
 	return
 }
 
-func (el *Element) VerifyDocument(document map[string]interface{}) (err error) {
-	return el.VerifyDocumentByProperties(&el.Properties, document)
-}
+//func (el *Element) VerifyDocument(document map[string]interface{}) {
+//	if el.ErrorList == nil {
+//	  el.ErrorList = make([]error, 0)
+//  }
+//  _ = el.VerifyDocumentByProperties(&el.Properties, document)
+//}
 
 func (el *Element) VerifyDocumentByProperties(propertiesPointer *map[string]map[string]BsonType, document map[string]interface{}) (err error) {
 
 	var found bool
 	var properties map[string]BsonType
-	var kind reflect.Kind
-	var rule interface{}
+	//var kind reflect.Kind
+	//var rule interface{}
 
 	for fieldKey, fieldValue := range document {
 		found, properties = el.getRules(propertiesPointer, fieldKey)
@@ -48,78 +56,76 @@ func (el *Element) VerifyDocumentByProperties(propertiesPointer *map[string]map[
 			continue
 		}
 
-		var pass = false
-		var errList = make([]error, 0)
+		switch converted := fieldValue.(type) {
+		case map[string]interface{}:
+			err = el.VerifyDocumentByProperties(propertiesPointer, converted)
+			if err != nil {
+				err = errors.New(fmt.Sprintf("document key '%v': '%v' (%v - type: %v)", fieldKey, fieldValue, err.Error(), reflect.ValueOf(fieldValue).Kind().String()))
+				el.ErrorList = append(el.ErrorList, err)
+			}
+		}
+
 		for _, v := range properties {
 			err = v.Verify(fieldValue)
-			if err == nil {
-				pass = true
-				break
-			}
-			errList = append(errList, err)
-		}
-		if pass == true {
-			continue
-		}
-
-		if len(errList) != 0 {
-			err = errors.New(fmt.Sprintf("document key '%v': '%v' (%v - type: %v)", fieldKey, fieldValue, errList[0].Error(), reflect.ValueOf(fieldValue).Kind().String()))
-			return err
-		}
-
-		err = errors.New("0 wrong type")
-		kind = reflect.ValueOf(fieldValue).Kind()
-		switch kind {
-		case reflect.String:
-			rule, found = properties["string"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-		case reflect.Float32:
-			rule, found = properties["decimal"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-			rule, found = properties["long"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-			rule, found = properties["int"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-		case reflect.Int64:
-			rule, found = properties["long"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-		case reflect.Int:
-			rule, found = properties["decimal"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-			rule, found = properties["long"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
-			}
-			rule, found = properties["int"]
-			if found == true {
-				err = rule.(BsonType).Verify(fieldValue)
-				break
+			if err != nil {
+				err = errors.New(fmt.Sprintf("document key '%v': '%v' (%v - type: %v)", fieldKey, fieldValue, err.Error(), reflect.ValueOf(fieldValue).Kind().String()))
+				el.ErrorList = append(el.ErrorList, err)
 			}
 		}
 
-		if err != nil {
-			err = errors.New(fmt.Sprintf("document key '%v': '%v' (%v - type: %v)", fieldKey, fieldValue, err.Error(), reflect.ValueOf(fieldValue).Kind().String()))
-			return
-		}
+		//err = errors.New("0 wrong type")
+		//kind = reflect.ValueOf(fieldValue).Kind()
+		//switch kind {
+		//case reflect.String:
+		//	rule, found = properties["string"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//case reflect.Float32:
+		//	rule, found = properties["decimal"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//	rule, found = properties["long"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//	rule, found = properties["int"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//case reflect.Int64:
+		//	rule, found = properties["long"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//case reflect.Int:
+		//	rule, found = properties["decimal"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//	rule, found = properties["long"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//	rule, found = properties["int"]
+		//	if found == true {
+		//		err = rule.(BsonType).Verify(fieldValue)
+		//		break
+		//	}
+		//}
+		//
+		//if err != nil {
+		//	err = errors.New(fmt.Sprintf("document key '%v': '%v' (%v - type: %v)", fieldKey, fieldValue, err.Error(), reflect.ValueOf(fieldValue).Kind().String()))
+		//	return
+		//}
 	}
 
 	_ = found

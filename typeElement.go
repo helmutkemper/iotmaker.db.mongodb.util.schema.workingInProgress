@@ -28,7 +28,14 @@ package iotmakerdbmongodbutilschema
   todo: tipo array 'MaxItems' necessita de 'has set'
   todo: tipos int, double, decimal, long 'Maximum' necessita de 'has set'
 */
+
 type Element struct {
+	TypeBsonObject
+
+	ErrorList []error
+}
+
+type _Element struct {
 	// schema document key name
 	Key string
 
@@ -64,6 +71,8 @@ type Element struct {
 	// A detailed description of the data that the schema models. This field is used for
 	// metadata purposes only and has no impact on schema validation.
 	Description string
+
+	ErrorList []error
 }
 
 // mountPatternPropertiesPattern (English): Receives the name of all keys contained in the

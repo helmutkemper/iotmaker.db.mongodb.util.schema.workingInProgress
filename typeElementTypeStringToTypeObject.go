@@ -5,7 +5,7 @@ import (
 )
 
 func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string]map[string]BsonType, key string, typeString string, schema map[string]interface{}) (err error) {
-	var newSchema map[string]interface{}
+	//var newSchema map[string]interface{}
 	var objType InterfaceBson
 
 	if *propertiesPointer == nil {
@@ -37,24 +37,22 @@ func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string
 			return
 		}
 
-		newSchema, _ = schema["properties"].(map[string]interface{})
-		for schemaCellKey, schemaCell := range newSchema {
-
-			var typesInCell []string
-			typesInCell, err = el.getPropertyBsonType(schemaCell.(map[string]interface{}))
-
-			for _, currentType := range typesInCell {
-				if key != "" {
-					schemaCellKey = key + "." + schemaCellKey
-				}
-				err = el.typeStringToTypeObjectPopulated(propertiesPointer, schemaCellKey, currentType, schemaCell.(map[string]interface{}))
-				if err != nil {
-					return
-				}
-			}
-		}
-
-		return
+		//newSchema, _ = schema["properties"].(map[string]interface{})
+		//for schemaCellKey, schemaCell := range newSchema {
+		//
+		//	var typesInCell []string
+		//	typesInCell, err = el.getPropertyBsonType(schemaCell.(map[string]interface{}))
+		//
+		//	for _, currentType := range typesInCell {
+		//		if key != "" {
+		//			schemaCellKey = key + "." + schemaCellKey
+		//		}
+		//		err = el.typeStringToTypeObjectPopulated(propertiesPointer, schemaCellKey, currentType, schemaCell.(map[string]interface{}))
+		//		if err != nil {
+		//			return
+		//		}
+		//	}
+		//}
 
 	case "double":
 		objType = &TypeBsonDouble{}
@@ -211,5 +209,4 @@ func (el *Element) populateDependencies(schema map[string]interface{}) (err erro
 	}
 
 	return
-
 }

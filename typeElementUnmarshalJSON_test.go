@@ -396,12 +396,22 @@ func ExampleElement_UnmarshalJSON() {
         "title": "main schema",
         "bsonType": "object",
         "required": [
-          "name"
+          "name", "object"
         ],
         "properties": {
           "_id": {
             "title": "ObjectID",
             "description": "MongoDB ObjectID"
+          },
+          "object": {
+            "title": "object test",
+            "bsonType": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "bsonType": "string"
+              }
+            }
           },
           "stringCompleteKey_1": {
             "bsonType": "string",
@@ -601,6 +611,108 @@ func ExampleElement_UnmarshalJSON() {
     }
   }
   `
+
+	jsonSchema = `
+  {
+    "validator": {
+      "$jsonSchema": {
+        "title": "main schema",
+        "bsonType": "object",
+        "required": [
+          "name", "object"
+        ],
+        "properties": {
+          "_id": {
+            "title": "ObjectID",
+            "description": "MongoDB ObjectID"
+          },
+          "object": {
+            "title": "object test",
+            "bsonType": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "bsonType": "string"
+              }
+            }
+          },
+          "arrayComplex_1": {
+            "bsonType": "array",
+            "items": {
+              "title": "sub schema",
+              "bsonType": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "title": {
+                  "bsonType": "string",
+                  "title": "title",
+                  "description": "'title' is a required string",
+                  "enum": ["Dr.", "Dra.", null]
+                },
+                "name": {
+                  "bsonType": "string",
+                  "title": "name text",
+                  "description": "'name' is an optional boolean value",
+                  "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
+                }
+              }
+            }
+          },
+          "street": {
+            "bsonType": "object",
+            "required": [
+              "name", "number"
+            ],
+            "description": "street data",
+            "properties": {
+              "name": {
+                "description": "street name",
+                "bsonType": "string"
+              },
+              "number": {
+                "description": "house number",
+                "bsonType": "int"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
+
+	jsonSchema = `
+  {
+    "validator": {
+      "$jsonSchema": {
+        "title": "main schema",
+        "bsonType": "object",
+        "required": [ "street" ],
+        "properties": {
+          "street": {
+            "bsonType": "object",
+            "required": [
+              "name", "number"
+            ],
+            "description": "street data",
+            "properties": {
+              "name": {
+                "description": "street name",
+                "bsonType": "string"
+              },
+              "number": {
+                "description": "house number",
+                "bsonType": "int"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
 	var err error
 	var schema = Element{}
 	err = schema.UnmarshalJSON([]byte(jsonSchema))
@@ -631,12 +743,14 @@ func ExampleElement_UnmarshalJSON() {
 				"name":  "Dino Sauro",
 			},
 		},
+		"object": map[string]interface{}{
+			"name": 0,
+		},
 		"DATE": time.Now().String(),
 	}
-	err = schema.VerifyDocument(mongoData)
+	err = schema.Verify(mongoData)
 	if err != nil {
-		fmt.Printf("error: %v\n", err.Error())
-		//debug.PrintStack()
+		panic(err)
 	}
 
 	// Output:
