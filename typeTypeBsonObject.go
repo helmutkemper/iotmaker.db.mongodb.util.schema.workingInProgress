@@ -199,7 +199,6 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 	var err error
 	var found bool
 	var rules BsonType
-	var key = ""
 
 	for key, properties := range el.Properties {
 		var pass = false
@@ -211,7 +210,7 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 			} else {
 				switch converted := value.(type) {
 				case map[string]interface{}:
-					err = rule.Verify(converted[key])
+					err = rule.Verify(converted[key], key)
 				}
 			}
 
@@ -231,7 +230,13 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 						break
 					}
 					r := t.(*TypeBsonObject)
-					r.VerifyRules(value.(map[string]interface{})[key])
+					switch value.(type) {
+					case map[string]interface{}:
+						r.VerifyRules(value.(map[string]interface{})[key])
+					default:
+						r.VerifyRules(value)
+					}
+
 				}
 
 				break
@@ -244,7 +249,9 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 			}
 		}
 	}
+	return
 
+	var key string
 	switch reflect.ValueOf(value).Kind() {
 	case reflect.Invalid:
 		fmt.Println("case reflect.Invalid:")
@@ -477,6 +484,7 @@ func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 		return
 	}
 
+	err = el.verifyType(value)
 	//err = el.VerifyRules(value)
 	//if err != nil {
 	//	return

@@ -53,7 +53,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/typeEnum.go">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/typeTypeBsonArray.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonBool.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonDecimal.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonDouble.go">
           <value>
             <set />
           </value>
@@ -64,6 +84,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/typeTypeBsonInt.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonLong.go">
           <value>
             <set />
           </value>
@@ -89,6 +114,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/typeTypeBsonObjectVerifyMinProperties.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonString.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeVerify.go">
           <value>
             <set />
           </value>

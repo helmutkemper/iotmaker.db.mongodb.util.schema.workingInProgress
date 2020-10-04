@@ -35,23 +35,50 @@ type Element struct {
 	TypeBsonObject
 }
 
-func (el *Element) VerifyErros() {
-	var localErrorList = make([]error, 0)
+func (el *Element) walking(key string, properties map[string]map[string]BsonType) {
+	for keyProperty, properties := range properties {
+		for dataType, rule := range properties {
+			key = key + "." + keyProperty
 
+			if dataType == "object" {
+				var t interface{}
+				t = rule.ElementType
+				if t == nil {
+					break
+				}
+				r := t.(*TypeBsonObject)
+				for _, err := range r.ErrorList {
+					fmt.Printf("error (%v): %v\n", key, err.Error())
+				}
+
+				el.walking(key, r.Properties)
+			}
+		}
+	}
+}
+
+func (el *Element) VerifyErros() {
 	for _, err := range el.ErrorList {
 		fmt.Printf("error: %v\n", err.Error())
 	}
 
-	for key, typesProperties := range el.Properties {
-		_ = key
-		for typeName, property := range typesProperties {
-			_ = typeName
-			_ = property
+	for key, properties := range el.Properties {
+		for dataType, rule := range properties {
 
-			localErrorList = property.ElementType.VerifyErros()
-			for _, err := range localErrorList {
-				fmt.Printf("%v.%v - error: %v\n", key, typeName, err.Error())
+			if dataType == "object" {
+				var t interface{}
+				t = rule.ElementType
+				if t == nil {
+					break
+				}
+				r := t.(*TypeBsonObject)
+				for _, err := range r.ErrorList {
+					fmt.Printf("error (%v): %v\n", key, err.Error())
+				}
+
+				el.walking(key, r.Properties)
 			}
+
 		}
 	}
 }
