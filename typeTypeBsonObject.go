@@ -63,6 +63,12 @@ type TypeBsonObject struct {
 	Dependencies map[string]map[string]BsonType
 
 	Required map[string]bool
+
+	ErrorList []error
+}
+
+func (el *TypeBsonObject) VerifyErros() (errorList []error) {
+	return el.ErrorList
 }
 
 func (el *TypeBsonObject) getTypeString() string {
@@ -154,6 +160,138 @@ func (el *TypeBsonObject) populateRequiredSupport(requiredPointer *map[string]bo
 	return
 }
 
+func (el *TypeBsonObject) VerifyRequired(mainKey string, required map[string]bool, value interface{}) (err error) {
+
+	var found bool
+
+	for k, v := range required {
+		if v == true {
+			_, found = value.(map[string]BsonType)[k]
+			if found == false {
+				if mainKey != "" {
+					k = mainKey + "." + k
+				}
+
+				if el.ErrorList == nil {
+					el.ErrorList = make([]error, 0)
+				}
+
+				el.ErrorList = append(el.ErrorList, errors.New(k+" not found"))
+				return
+			}
+		}
+	}
+
+	return
+}
+
+func (el *TypeBsonObject) convertGolangTypeToMongoType(goType string) (mongoType string) {
+	switch goType {
+	case "map":
+		return "object"
+	}
+
+	return goType
+}
+
+func (el *TypeBsonObject) VerifyRules(value interface{}) (err error) {
+
+	var valueAsMap map[string]interface{}
+
+	switch converted := value.(type) {
+	case map[string]interface{}:
+		valueAsMap = converted
+
+	default:
+		err = errors.New("data must be a map[string]interface{}")
+		return
+	}
+
+	var found bool
+	var rules BsonType
+	var kindAsString string
+
+	for dataKey, dataValue := range valueAsMap {
+		kindAsString = reflect.ValueOf(dataValue).Kind().String()
+		kindAsString = el.convertGolangTypeToMongoType(kindAsString)
+
+		_, found = el.Properties[dataKey]
+		if found == false {
+			continue
+		}
+
+		rules, found = el.Properties[dataKey][kindAsString]
+		if found == false {
+			err = errors.New("'" + dataKey + "' wrong data type")
+
+			if el.ErrorList == nil {
+				el.ErrorList = make([]error, 0)
+			}
+			el.ErrorList = append(el.ErrorList, err)
+			continue
+		}
+
+		err = rules.Verify(dataValue)
+		if err != nil {
+
+			if el.ErrorList == nil {
+				el.ErrorList = make([]error, 0)
+			}
+			el.ErrorList = append(el.ErrorList, err)
+			continue
+		}
+
+		// fixme: melhorar isto - início
+		if el.Required == nil {
+			continue
+		}
+
+		el.Required[dataKey] = false
+		// fixme: melhorar isto - fim
+
+	}
+
+	switch value.(type) {
+	case map[string]interface{}:
+		for k, v := range el.Required {
+			if v == false {
+				continue
+			}
+
+			_, found = value.(map[string]interface{})[k]
+			if found == false {
+				el.ErrorList = append(el.ErrorList, errors.New(k+" not found"))
+			}
+		}
+	}
+
+	for dataKey, dataValue := range el.Properties {
+		for keyType, property := range el.Properties[dataKey] {
+			if keyType != "object" {
+				continue
+			}
+
+			var t interface{}
+			t = property.ElementType
+			if t == nil {
+				continue
+			}
+			r := t.(*TypeBsonObject)
+			rl := r.Required
+			err = el.VerifyRequired(dataKey, rl, dataValue)
+			if err != nil {
+				el.ErrorList = append(el.ErrorList, err)
+				continue
+			}
+		}
+	}
+
+	//if len(el.ErrorList) != 0 {
+	//  err = errors.New("verification erros found")
+	//}
+	return
+}
+
 func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 
 	err = el.verifyParent(value)
@@ -167,6 +305,11 @@ func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 	}
 
 	err = el.verifyMinProperties()
+	if err != nil {
+		return
+	}
+
+	err = el.VerifyRules(value)
 	if err != nil {
 		return
 	}

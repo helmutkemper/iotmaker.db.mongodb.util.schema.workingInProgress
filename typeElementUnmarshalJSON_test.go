@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"runtime/debug"
-	"time"
 )
 
 func ExampleElement_UnmarshalJSON() {
@@ -700,7 +699,10 @@ func ExampleElement_UnmarshalJSON() {
             "properties": {
               "name": {
                 "description": "street name",
-                "bsonType": "string"
+                "bsonType": "string",
+                "title": "name text",
+                "description": "'name' must be a string",
+                "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
               },
               "number": {
                 "description": "house number",
@@ -722,36 +724,156 @@ func ExampleElement_UnmarshalJSON() {
 	}
 
 	mongoData := map[string]interface{}{
-		"_id":                 primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
-		"stringCompleteKey_1": "dinossauro",
-		"stringCompleteKey_2": nil,
-		"intComplexKey_1":     10,
-		"intComplexKey_2":     40,
-		"intComplexKey_3":     100,
-		"longComplexKey_1":    50,
-		"longComplexKey_2":    45,
-		"longComplexKey_3":    2,
-		"decimalComplexKey_1": 22,
-		"decimalComplexKey_2": 19.8,
-		"decimalComplexKey_3": 1.3,
-		"doubleComplexKey_1":  22,
-		"doubleComplexKey_2":  15.4,
-		"doubleComplexKey_3":  6.674184e-11,
-		"arrayComplex_1": []map[string]interface{}{
-			{
-				"title": "Dr.",
-				"name":  "Dino Sauro",
+		"_id": primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
+		//"stringCompleteKey_1": "dinossauro",
+		//"stringCompleteKey_2": nil,
+		//"intComplexKey_1":     10,
+		//"intComplexKey_2":     40,
+		//"intComplexKey_3":     100,
+		//"longComplexKey_1":    50,
+		//"longComplexKey_2":    45,
+		//"longComplexKey_3":    2,
+		//"decimalComplexKey_1": 22,
+		//"decimalComplexKey_2": 19.8,
+		//"decimalComplexKey_3": 1.3,
+		//"doubleComplexKey_1":  22,
+		//"doubleComplexKey_2":  15.4,
+		//"doubleComplexKey_3":  6.674184e-11,
+		//"arrayComplex_1": []map[string]interface{}{
+		//	{
+		//		"title": "Dr.",
+		//		"name":  "Dino Sauro",
+		//	},
+		//},
+		"street": map[string]interface{}{
+			"name":   "DinoSauro",
+			"number": "123",
+		},
+	}
+	_ = schema.Verify(mongoData)
+	schema.VerifyErros()
+
+	// Output:
+	//
+}
+
+func ExampleElement_UnmarshalJSON_object_1() {
+
+	var jsonSchema string
+
+	jsonSchema = `
+  {
+    "validator": {
+      "$jsonSchema": {
+        "title": "main schema",
+        "bsonType": "object",
+        "required": [ "street" ],
+        "properties": {
+          "street": {
+            "bsonType": "object",
+            "required": [
+              "name", "number"
+            ],
+            "description": "street data",
+            "properties": {
+              "name": {
+                "description": "street name",
+                "bsonType": "string",
+                "title": "name text",
+                "description": "'name' must be a string",
+                "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
+              },
+              "number": {
+                "description": "house number",
+                "bsonType": "int"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
+	var err error
+	var schema = Element{}
+	err = schema.UnmarshalJSON([]byte(jsonSchema))
+	if err != nil {
+		fmt.Printf("error: %v\n", err.Error())
+		debug.PrintStack()
+	}
+
+	mongoData := map[string]interface{}{
+		"_id": primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
+		"street": map[string]interface{}{
+			"name":   "Dino Sauro",
+			"number": 123,
+		},
+	}
+	_ = schema.Verify(mongoData)
+	schema.VerifyErros()
+
+	// Output:
+	//
+}
+
+func ExampleElement_UnmarshalJSON_object_2() {
+
+	var jsonSchema string
+
+	jsonSchema = `
+  {
+    "validator": {
+      "$jsonSchema": {
+        "title": "main schema",
+        "bsonType": "object",
+        "required": [ "user" ],
+        "properties": {
+          "user": {
+            "bsonType": "object",
+            "required": [ "name", "number" ],
+            "properties": {
+              "street": {
+                "bsonType": "object",
+                "properties": {
+                  "name": {
+                    "description": "street name",
+                    "bsonType": "string",
+                    "title": "name text",
+                    "description": "'name' must be a string",
+                    "pattern": "^[A-Z][a-z]+\\s+[A-Z][a-z]+$"
+                  },
+                  "number": {
+                    "description": "house number",
+                    "bsonType": "int"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `
+	var err error
+	var schema = Element{}
+	err = schema.UnmarshalJSON([]byte(jsonSchema))
+	if err != nil {
+		fmt.Printf("error: %v\n", err.Error())
+		debug.PrintStack()
+	}
+
+	mongoData := map[string]interface{}{
+		"_id": primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
+		"user": map[string]interface{}{
+			"street": map[string]interface{}{
+				"name":   "DinoSauro",
+				"number": 123,
 			},
 		},
-		"object": map[string]interface{}{
-			"name": 0,
-		},
-		"DATE": time.Now().String(),
 	}
-	err = schema.Verify(mongoData)
-	if err != nil {
-		panic(err)
-	}
+	_ = schema.Verify(mongoData)
+	schema.VerifyErros()
 
 	// Output:
 	//

@@ -10,8 +10,9 @@ import (
 )
 
 type InterfaceBson interface {
-	Verify(value interface{}) (err error)
 	Populate(schema map[string]interface{}) (err error)
+	Verify(value interface{}) (err error)
+	VerifyErros() (errorList []error)
 }
 
 type AdditionalItems interface{}
@@ -89,6 +90,10 @@ type TypeBsonCommonToAllTypes struct {
 	// A detailed description of the data that the schema models. This field is used for
 	// metadata purposes only and has no impact on schema validation.
 	Description string
+}
+
+func (el *TypeBsonCommonToAllTypes) VerifyErros() (errorList []error) {
+	return nil
 }
 
 func (el *TypeBsonCommonToAllTypes) round(value float64, places float64) float64 {

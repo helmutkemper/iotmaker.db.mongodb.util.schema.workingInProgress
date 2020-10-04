@@ -1,5 +1,7 @@
 package iotmakerdbmongodbutilschema
 
+import "fmt"
+
 /*
   bsonType: "object",
   required: ["name"],
@@ -31,8 +33,27 @@ package iotmakerdbmongodbutilschema
 
 type Element struct {
 	TypeBsonObject
+}
 
-	ErrorList []error
+func (el *Element) VerifyErros() {
+	var localErrorList = make([]error, 0)
+
+	for _, err := range el.ErrorList {
+		fmt.Printf("error: %v\n", err.Error())
+	}
+
+	for key, typesProperties := range el.Properties {
+		_ = key
+		for typeName, property := range typesProperties {
+			_ = typeName
+			_ = property
+
+			localErrorList = property.ElementType.VerifyErros()
+			for _, err := range localErrorList {
+				fmt.Printf("%v.%v - error: %v\n", key, typeName, err.Error())
+			}
+		}
+	}
 }
 
 type _Element struct {
