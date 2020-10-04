@@ -826,9 +826,9 @@ func ExampleElement_UnmarshalJSON_object_2() {
       "$jsonSchema": {
         "title": "main schema",
         "bsonType": "object",
-        "required": [ "user" ],
+        "required": [ "address" ],
         "properties": {
-          "user": {
+          "address": {
             "bsonType": "object",
             "required": [ "name", "number" ],
             "properties": {
@@ -865,14 +865,14 @@ func ExampleElement_UnmarshalJSON_object_2() {
 
 	mongoData := map[string]interface{}{
 		"_id": primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
-		"user": map[string]interface{}{
+		"address": map[string]interface{}{
 			"street": map[string]interface{}{
 				"name":   "DinoSauro",
 				"number": 123,
 			},
 		},
 	}
-	_ = schema.Verify(mongoData)
+	schema.VerifyRules(mongoData)
 	schema.VerifyErros()
 
 	// Output:

@@ -2,6 +2,7 @@ package iotmakerdbmongodbutilschema
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
 )
 
@@ -194,7 +195,174 @@ func (el *TypeBsonObject) convertGolangTypeToMongoType(goType string) (mongoType
 	return goType
 }
 
-func (el *TypeBsonObject) VerifyRules(value interface{}) (err error) {
+func (el *TypeBsonObject) VerifyRules(value interface{}) {
+	var err error
+	var found bool
+	var rules BsonType
+	var key = ""
+
+	for key, properties := range el.Properties {
+		var pass = false
+		var errList = make([]error, 0)
+		for dataType, rule := range properties {
+
+			if dataType == "object" {
+				err = rule.Verify(value)
+			} else {
+				switch converted := value.(type) {
+				case map[string]interface{}:
+					err = rule.Verify(converted[key])
+				}
+			}
+
+			if err != nil {
+				if el.ErrorList == nil {
+					el.ErrorList = make([]error, 0)
+				}
+				el.ErrorList = append(el.ErrorList, err)
+
+			} else {
+				pass = true
+
+				if dataType == "object" {
+					var t interface{}
+					t = rule.ElementType
+					if t == nil {
+						break
+					}
+					r := t.(*TypeBsonObject)
+					r.VerifyRules(value.(map[string]interface{})[key])
+				}
+
+				break
+			}
+		}
+
+		if pass == false {
+			for _, err = range errList {
+				fmt.Printf("error: %v\n", err.Error())
+			}
+		}
+	}
+
+	switch reflect.ValueOf(value).Kind() {
+	case reflect.Invalid:
+		fmt.Println("case reflect.Invalid:")
+		rules, found = el.Properties[key]["null"]
+
+	case reflect.Bool:
+		fmt.Println("case reflect.Bool:")
+		rules, found = el.Properties[key]["bool"]
+
+	case reflect.Int:
+		fmt.Println("case reflect.Int:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Int8:
+		fmt.Println("case reflect.Int8:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Int16:
+		fmt.Println("case reflect.Int16:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Int32:
+		fmt.Println("case reflect.Int32:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Int64:
+		fmt.Println("case reflect.Int64:")
+		rules, found = el.Properties[key]["long"]
+
+	case reflect.Uint:
+		fmt.Println("case reflect.Uint:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Uint8:
+		fmt.Println("case reflect.Uint8:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Uint16:
+		fmt.Println("case reflect.Uint16:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Uint32:
+		fmt.Println("case reflect.Uint32:")
+		rules, found = el.Properties[key]["int"]
+
+	case reflect.Uint64:
+		fmt.Println("case reflect.Uint64:")
+		rules, found = el.Properties[key]["long"]
+
+	case reflect.Uintptr:
+		fmt.Println("case reflect.Uintptr:")
+		rules, found = el.Properties[key]["error"]
+
+	case reflect.Float32:
+		fmt.Println("case reflect.Float32:")
+		rules, found = el.Properties[key]["double"]
+
+	case reflect.Float64:
+		fmt.Println("case reflect.Float64:")
+		rules, found = el.Properties[key]["double"]
+
+	case reflect.Complex64:
+		fmt.Println("case reflect.Complex64:")
+		rules, found = el.Properties[key]["decimal"]
+
+	case reflect.Complex128:
+		fmt.Println("case reflect.Complex128:")
+		rules, found = el.Properties[key]["decimal"]
+
+	case reflect.Array:
+		fmt.Println("case reflect.Array:")
+		rules, found = el.Properties[key]["array"]
+
+	case reflect.Chan:
+		fmt.Println("case reflect.Chan:")
+		rules, found = el.Properties[key]["error"]
+
+	case reflect.Func:
+		fmt.Println("case reflect.Func:")
+		rules, found = el.Properties[key]["error"]
+
+	case reflect.Interface:
+		fmt.Println("case reflect.Interface:")
+		rules, found = el.Properties[key]["error"]
+
+	case reflect.Map:
+		fmt.Println("case reflect.Map:")
+		rules, found = el.Properties[key]["object"]
+
+	case reflect.Ptr:
+		fmt.Println("case reflect.Ptr:")
+		rules, found = el.Properties[key]["error"]
+
+	case reflect.Slice:
+		fmt.Println("case reflect.Slice:")
+		rules, found = el.Properties[key]["array"]
+
+	case reflect.String:
+		fmt.Println("case reflect.String:")
+		rules, found = el.Properties[key]["string"]
+
+	case reflect.Struct:
+		fmt.Println("case reflect.Struct:")
+		rules, found = el.Properties[key]["object"]
+
+	case reflect.UnsafePointer:
+		fmt.Println("case reflect.UnsafePointer:")
+		rules, found = el.Properties[key]["error"]
+	}
+
+	if found == true {
+		err = rules.Verify(value)
+	}
+
+	return
+}
+
+func (el *TypeBsonObject) _VerifyRules(value interface{}) (err error) {
 
 	var valueAsMap map[string]interface{}
 
@@ -309,10 +477,10 @@ func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 		return
 	}
 
-	err = el.VerifyRules(value)
-	if err != nil {
-		return
-	}
+	//err = el.VerifyRules(value)
+	//if err != nil {
+	//	return
+	//}
 
 	return
 }

@@ -10,13 +10,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d6e0d50-2c5a-442d-bdf5-2fcdd2a61edc" name="Default Changelist" comment="working">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
+    <list default="true" id="0d6e0d50-2c5a-442d-bdf5-2fcdd2a61edc" name="Default Changelist" comment="testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElement.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeElement.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typeElementUnmarshalJSON_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeElementUnmarshalJSON_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonArray.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonArray.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonGeneric.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonGeneric.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typeTypeBsonObject.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonObject.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,53 +141,54 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="working" />
-    <option name="LAST_COMMIT_MESSAGE" value="working" />
+    <MESSAGE value="testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1170" height="466" key="DebuggerActiveHint" timestamp="1601667073847">
+    <state width="1170" height="466" key="DebuggerActiveHint" timestamp="1601845203318">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1170" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1601667073847" />
-    <state width="1323" height="216" key="GridCell.Tab.0.bottom" timestamp="1601671259122">
+    <state width="1170" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1601845203318" />
+    <state width="1323" height="216" key="GridCell.Tab.0.bottom" timestamp="1601845413591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.0.center" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601845413591" />
+    <state width="1323" height="216" key="GridCell.Tab.0.center" timestamp="1601845413591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.0.left" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601845413591" />
+    <state width="1323" height="216" key="GridCell.Tab.0.left" timestamp="1601845413591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.0.right" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601845413591" />
+    <state width="1323" height="216" key="GridCell.Tab.0.right" timestamp="1601845413591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.1.bottom" timestamp="1601671259123">
+    <state width="1323" height="216" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601845413591" />
+    <state width="1323" height="216" key="GridCell.Tab.1.bottom" timestamp="1601845413592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601671259123" />
-    <state width="1323" height="216" key="GridCell.Tab.1.center" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601845413592" />
+    <state width="1323" height="216" key="GridCell.Tab.1.center" timestamp="1601845413592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.1.left" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1601845413592" />
+    <state width="1323" height="216" key="GridCell.Tab.1.left" timestamp="1601845413592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
-    <state width="1323" height="216" key="GridCell.Tab.1.right" timestamp="1601671259122">
+    <state width="1323" height="216" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1601845413592" />
+    <state width="1323" height="216" key="GridCell.Tab.1.right" timestamp="1601845413592">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="216" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1601671259122" />
+    <state width="1323" height="216" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1601845413592" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1601169746994">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601169746994" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601523611259">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601772915497">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601523611259" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601772915497" />
     <state x="462" y="202" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1601321922695">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -200,10 +197,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1601318725062" />
-    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601318353150">
+    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601841253385">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601318353150" />
+    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1601841253385" />
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601772865808">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1601772865808" />
     <state x="390" y="85" width="942" height="558" key="find.popup" timestamp="1601645844382">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -229,22 +230,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/typeTypeBsonObject.go</url>
-          <line>166</line>
+          <line>167</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/typeTypeBsonObject.go</url>
-          <line>268</line>
+          <line>435</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/typeElementUnmarshalJSON_test.go</url>
-          <line>875</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/typeTypeBsonObject.go</url>
-          <line>248</line>
+          <line>416</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
