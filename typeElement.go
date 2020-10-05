@@ -150,27 +150,3 @@ func (el *Element) mountPatternPropertiesPattern(keyList []string) {
 	    }
 	  }*/
 }
-
-func (el *Element) verifyRequired() (requiredList []string, err error) {
-	/*
-	   requiredList = make([]string, 0)
-	   for _, requiredKey := range el.Required {
-	     var pass = false
-	     for _, property := range el.Properties {
-	       if property.Key == requiredKey {
-	         pass = true
-	         break
-	       }
-	     }
-
-	     if pass == false {
-	       requiredList = append(requiredList, requiredKey)
-	     }
-	   }
-
-	   if len(requiredList) != 0 {
-	     err = errors.New("required keys not found")
-	   }
-	*/
-	return
-}

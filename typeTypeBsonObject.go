@@ -2,7 +2,6 @@ package iotmakerdbmongodbutilschema
 
 import (
 	"errors"
-	"fmt"
 	"reflect"
 )
 
@@ -186,7 +185,7 @@ func (el *TypeBsonObject) VerifyRequired(mainKey string, required map[string]boo
 	return
 }
 
-func (el *TypeBsonObject) convertGolangTypeToMongoType(goType string) (mongoType string) {
+func (el *TypeBsonObject) _convertGolangTypeToMongoType(goType string) (mongoType string) {
 	switch goType {
 	case "map":
 		return "object"
@@ -198,19 +197,34 @@ func (el *TypeBsonObject) convertGolangTypeToMongoType(goType string) (mongoType
 func (el *TypeBsonObject) VerifyRules(value interface{}) {
 	var err error
 	var found bool
-	var rules BsonType
 
 	for key, properties := range el.Properties {
-		var pass = false
-		var errList = make([]error, 0)
+
 		for dataType, rule := range properties {
 
 			if dataType == "object" {
-				err = rule.Verify(value)
+				switch converted := value.(type) {
+				case map[string]interface{}:
+					_, found = converted[key]
+					if el.Required[key] == true && found == false {
+						err = errors.New(key + " is required")
+					} else if found == true {
+						err = rule.Verify(value)
+					}
+				}
+
 			} else {
 				switch converted := value.(type) {
 				case map[string]interface{}:
-					err = rule.Verify(converted[key], key)
+
+					_, found = converted[key]
+					if el.Required[key] == true && found == false {
+						err = errors.New(key + " is required")
+					} else if found == false {
+						continue
+					} else {
+						err = rule.Verify(converted[key], key)
+					}
 				}
 			}
 
@@ -221,253 +235,28 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 				el.ErrorList = append(el.ErrorList, err)
 
 			} else {
-				pass = true
-
 				if dataType == "object" {
-					var t interface{}
-					t = rule.ElementType
-					if t == nil {
+					if rule.ElementType == nil {
 						break
 					}
-					r := t.(*TypeBsonObject)
 					switch value.(type) {
 					case map[string]interface{}:
-						r.VerifyRules(value.(map[string]interface{})[key])
+						rule.ElementType.(*TypeBsonObject).VerifyRules(value.(map[string]interface{})[key])
 					default:
-						r.VerifyRules(value)
+						rule.ElementType.(*TypeBsonObject).VerifyRules(value)
 					}
-
 				}
 
 				break
 			}
 		}
 
-		if pass == false {
-			for _, err = range errList {
-				fmt.Printf("error: %v\n", err.Error())
-			}
-		}
 	}
-	return
-
-	var key string
-	switch reflect.ValueOf(value).Kind() {
-	case reflect.Invalid:
-		fmt.Println("case reflect.Invalid:")
-		rules, found = el.Properties[key]["null"]
-
-	case reflect.Bool:
-		fmt.Println("case reflect.Bool:")
-		rules, found = el.Properties[key]["bool"]
-
-	case reflect.Int:
-		fmt.Println("case reflect.Int:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Int8:
-		fmt.Println("case reflect.Int8:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Int16:
-		fmt.Println("case reflect.Int16:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Int32:
-		fmt.Println("case reflect.Int32:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Int64:
-		fmt.Println("case reflect.Int64:")
-		rules, found = el.Properties[key]["long"]
-
-	case reflect.Uint:
-		fmt.Println("case reflect.Uint:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Uint8:
-		fmt.Println("case reflect.Uint8:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Uint16:
-		fmt.Println("case reflect.Uint16:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Uint32:
-		fmt.Println("case reflect.Uint32:")
-		rules, found = el.Properties[key]["int"]
-
-	case reflect.Uint64:
-		fmt.Println("case reflect.Uint64:")
-		rules, found = el.Properties[key]["long"]
-
-	case reflect.Uintptr:
-		fmt.Println("case reflect.Uintptr:")
-		rules, found = el.Properties[key]["error"]
-
-	case reflect.Float32:
-		fmt.Println("case reflect.Float32:")
-		rules, found = el.Properties[key]["double"]
-
-	case reflect.Float64:
-		fmt.Println("case reflect.Float64:")
-		rules, found = el.Properties[key]["double"]
-
-	case reflect.Complex64:
-		fmt.Println("case reflect.Complex64:")
-		rules, found = el.Properties[key]["decimal"]
-
-	case reflect.Complex128:
-		fmt.Println("case reflect.Complex128:")
-		rules, found = el.Properties[key]["decimal"]
-
-	case reflect.Array:
-		fmt.Println("case reflect.Array:")
-		rules, found = el.Properties[key]["array"]
-
-	case reflect.Chan:
-		fmt.Println("case reflect.Chan:")
-		rules, found = el.Properties[key]["error"]
-
-	case reflect.Func:
-		fmt.Println("case reflect.Func:")
-		rules, found = el.Properties[key]["error"]
-
-	case reflect.Interface:
-		fmt.Println("case reflect.Interface:")
-		rules, found = el.Properties[key]["error"]
-
-	case reflect.Map:
-		fmt.Println("case reflect.Map:")
-		rules, found = el.Properties[key]["object"]
-
-	case reflect.Ptr:
-		fmt.Println("case reflect.Ptr:")
-		rules, found = el.Properties[key]["error"]
-
-	case reflect.Slice:
-		fmt.Println("case reflect.Slice:")
-		rules, found = el.Properties[key]["array"]
-
-	case reflect.String:
-		fmt.Println("case reflect.String:")
-		rules, found = el.Properties[key]["string"]
-
-	case reflect.Struct:
-		fmt.Println("case reflect.Struct:")
-		rules, found = el.Properties[key]["object"]
-
-	case reflect.UnsafePointer:
-		fmt.Println("case reflect.UnsafePointer:")
-		rules, found = el.Properties[key]["error"]
-	}
-
-	if found == true {
-		err = rules.Verify(value)
-	}
-
-	return
-}
-
-func (el *TypeBsonObject) _VerifyRules(value interface{}) (err error) {
-
-	var valueAsMap map[string]interface{}
-
-	switch converted := value.(type) {
-	case map[string]interface{}:
-		valueAsMap = converted
-
-	default:
-		err = errors.New("data must be a map[string]interface{}")
-		return
-	}
-
-	var found bool
-	var rules BsonType
-	var kindAsString string
-
-	for dataKey, dataValue := range valueAsMap {
-		kindAsString = reflect.ValueOf(dataValue).Kind().String()
-		kindAsString = el.convertGolangTypeToMongoType(kindAsString)
-
-		_, found = el.Properties[dataKey]
-		if found == false {
-			continue
-		}
-
-		rules, found = el.Properties[dataKey][kindAsString]
-		if found == false {
-			err = errors.New("'" + dataKey + "' wrong data type")
-
-			if el.ErrorList == nil {
-				el.ErrorList = make([]error, 0)
-			}
-			el.ErrorList = append(el.ErrorList, err)
-			continue
-		}
-
-		err = rules.Verify(dataValue)
-		if err != nil {
-
-			if el.ErrorList == nil {
-				el.ErrorList = make([]error, 0)
-			}
-			el.ErrorList = append(el.ErrorList, err)
-			continue
-		}
-
-		// fixme: melhorar isto - início
-		if el.Required == nil {
-			continue
-		}
-
-		el.Required[dataKey] = false
-		// fixme: melhorar isto - fim
-
-	}
-
-	switch value.(type) {
-	case map[string]interface{}:
-		for k, v := range el.Required {
-			if v == false {
-				continue
-			}
-
-			_, found = value.(map[string]interface{})[k]
-			if found == false {
-				el.ErrorList = append(el.ErrorList, errors.New(k+" not found"))
-			}
-		}
-	}
-
-	for dataKey, dataValue := range el.Properties {
-		for keyType, property := range el.Properties[dataKey] {
-			if keyType != "object" {
-				continue
-			}
-
-			var t interface{}
-			t = property.ElementType
-			if t == nil {
-				continue
-			}
-			r := t.(*TypeBsonObject)
-			rl := r.Required
-			err = el.VerifyRequired(dataKey, rl, dataValue)
-			if err != nil {
-				el.ErrorList = append(el.ErrorList, err)
-				continue
-			}
-		}
-	}
-
-	//if len(el.ErrorList) != 0 {
-	//  err = errors.New("verification erros found")
-	//}
 	return
 }
 
 func (el *TypeBsonObject) Verify(value interface{}) (err error) {
+	el.ErrorList = make([]error, 0)
 
 	err = el.verifyParent(value)
 	if err != nil {
@@ -485,10 +274,6 @@ func (el *TypeBsonObject) Verify(value interface{}) (err error) {
 	}
 
 	err = el.verifyType(value)
-	//err = el.VerifyRules(value)
-	//if err != nil {
-	//	return
-	//}
 
 	return
 }
@@ -522,14 +307,6 @@ func (el *TypeBsonObject) getPropertyMaxProperties(schema map[string]interface{}
 func (el *TypeBsonObject) populateBsonType(schema map[string]interface{}) (properties map[string]map[string]BsonType, err error) {
 
 	properties = make(map[string]map[string]BsonType)
-	//var typeList []string
-	//typeList, err = el.getPropertyBsonTypeAsSlice(schema)
-	//for _, v := range typeList {
-	//  err = el.typeStringToTypeObjectPopulated(&properties, "", v, schema)
-	//  if err != nil {
-	//    return
-	//  }
-	//}
 
 	var newSchema map[string]interface{}
 	newSchema, _ = schema["properties"].(map[string]interface{})
@@ -539,9 +316,6 @@ func (el *TypeBsonObject) populateBsonType(schema map[string]interface{}) (prope
 		typesInCell, err = el.getPropertyBsonTypeAsSlice(schemaCell.(map[string]interface{}))
 
 		for _, currentType := range typesInCell {
-			//if key != "" {
-			//  schemaCellKey = key + "." + schemaCellKey
-			//}
 			err = el.typeStringToTypeObjectPopulated(&properties, schemaCellKey, currentType, schemaCell.(map[string]interface{}))
 			if err != nil {
 				return
@@ -617,23 +391,6 @@ func (el *TypeBsonObject) typeStringToTypeObjectPopulated(propertiesPointer *map
 		if err != nil {
 			return
 		}
-
-		//newSchema, _ = schema["properties"].(map[string]interface{})
-		//for schemaCellKey, schemaCell := range newSchema {
-		//
-		//  var typesInCell []string
-		//  typesInCell, err = el.getPropertyBsonTypeAsSlice(schemaCell.(map[string]interface{}))
-		//
-		//  for _, currentType := range typesInCell {
-		//    if key != "" {
-		//      schemaCellKey = key + "." + schemaCellKey
-		//    }
-		//    err = el.typeStringToTypeObjectPopulated(propertiesPointer, schemaCellKey, currentType, schemaCell.(map[string]interface{}))
-		//    if err != nil {
-		//      return
-		//    }
-		//  }
-		//}
 
 	case "double":
 		objType = &TypeBsonDouble{}

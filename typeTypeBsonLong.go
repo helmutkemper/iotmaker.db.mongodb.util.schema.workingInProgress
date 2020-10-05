@@ -45,9 +45,11 @@ type TypeBsonLong struct {
 }
 
 func (el *TypeBsonLong) Verify(value interface{}) (err error) {
-	value, err = el.TypeBsonCommonToAllTypes.parentConvertInterfaceToInt64(value)
-	if err != nil {
-		return
+	if value != nil {
+		value, err = el.TypeBsonCommonToAllTypes.parentConvertInterfaceToInt64(value)
+		if err != nil {
+			return
+		}
 	}
 
 	err = el.verifyParent(value)
@@ -75,7 +77,11 @@ func (el *TypeBsonLong) Verify(value interface{}) (err error) {
 }
 
 func (el *TypeBsonLong) VerifyType(value interface{}) (err error) {
-	if value == nil && el.Enum.values != nil {
+	if value == nil && el.Enum.values == nil {
+		return
+	}
+
+	if el.Enum.values != nil {
 		err = el.Enum.Verify(value)
 		return
 	}
@@ -84,6 +90,10 @@ func (el *TypeBsonLong) VerifyType(value interface{}) (err error) {
 }
 
 func (el *TypeBsonLong) VerifyMultipleOf(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
+
 	var module int64
 	if el.MultipleOf == 0 {
 		return
@@ -104,6 +114,10 @@ func (el *TypeBsonLong) VerifyMultipleOf(value interface{}) (err error) {
 }
 
 func (el *TypeBsonLong) VerifyMaximum(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
+
 	if el.Maximum == 0 {
 		return
 	}
@@ -128,6 +142,10 @@ func (el *TypeBsonLong) VerifyMaximum(value interface{}) (err error) {
 }
 
 func (el *TypeBsonLong) VerifyMinimum(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
+
 	if el.MinimumHasSet == false {
 		return
 	}

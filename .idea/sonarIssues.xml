@@ -28,6 +28,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/typeElementGetPropertyDescription.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeElementGetPropertyRequired.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeElementGetPropertyTitle.go">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/typeElementGetSchemaElements.go">
           <value>
             <set />
@@ -54,6 +69,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/typeEnum.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typePatternProperties.go">
           <value>
             <set />
           </value>

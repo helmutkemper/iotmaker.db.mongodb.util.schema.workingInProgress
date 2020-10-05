@@ -59,7 +59,7 @@ func (el *TypeBsonString) Verify(value interface{}) (err error) {
 }
 
 func (el *TypeBsonString) VerifyMaxLength(value interface{}) (err error) {
-	if el.MaxLength == 0 {
+	if value == nil || el.MaxLength == 0 {
 		return
 	}
 
@@ -71,7 +71,7 @@ func (el *TypeBsonString) VerifyMaxLength(value interface{}) (err error) {
 }
 
 func (el *TypeBsonString) VerifyMinLength(value interface{}) (err error) {
-	if el.MinLength == 0 {
+	if value == nil || el.MinLength == 0 {
 		return
 	}
 
@@ -83,7 +83,7 @@ func (el *TypeBsonString) VerifyMinLength(value interface{}) (err error) {
 }
 
 func (el *TypeBsonString) VerifyPattern(value interface{}) (err error) {
-	if el.Pattern == nil {
+	if value == nil || el.Pattern == nil {
 		return
 	}
 

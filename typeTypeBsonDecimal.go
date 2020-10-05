@@ -45,9 +45,11 @@ type TypeBsonDecimal struct {
 }
 
 func (el *TypeBsonDecimal) Verify(value interface{}) (err error) {
-	value, err = el.TypeBsonCommonToAllTypes.parentConvertInterfaceToFloat32(value)
-	if err != nil {
-		return
+	if value != nil {
+		value, err = el.TypeBsonCommonToAllTypes.parentConvertInterfaceToFloat32(value)
+		if err != nil {
+			return
+		}
 	}
 
 	err = el.verifyParent(value)
@@ -75,7 +77,11 @@ func (el *TypeBsonDecimal) Verify(value interface{}) (err error) {
 }
 
 func (el *TypeBsonDecimal) VerifyType(value interface{}) (err error) {
-	if value == nil && el.Enum.values != nil {
+	if value == nil && el.Enum.values == nil {
+		return
+	}
+
+	if el.Enum.values != nil {
 		err = el.Enum.Verify(value)
 		return
 	}

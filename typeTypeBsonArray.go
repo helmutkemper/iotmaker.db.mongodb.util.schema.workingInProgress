@@ -88,15 +88,23 @@ func (el *TypeBsonArray) Verify(value interface{}) (err error) {
 }
 
 func (el *TypeBsonArray) VerifyType(value interface{}) (err error) {
-	if value == nil && el.Enum.values != nil {
+	if value == nil && el.Enum.values == nil {
+		return
+	}
+
+	if el.Enum.values != nil {
 		err = el.Enum.Verify(value)
 		return
 	}
+
 	err = el.parentVerifyInterfaceTypeIsArray(value)
 	return
 }
 
 func (el *TypeBsonArray) VerifyMaxItems(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
 
 	if el.MaxItems == 0 {
 		return
@@ -117,6 +125,9 @@ func (el *TypeBsonArray) VerifyMaxItems(value interface{}) (err error) {
 }
 
 func (el *TypeBsonArray) VerifyMinItems(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
 
 	if el.MinItemsHasSet == false {
 		return
@@ -137,6 +148,10 @@ func (el *TypeBsonArray) VerifyMinItems(value interface{}) (err error) {
 }
 
 func (el *TypeBsonArray) verifyItems(value interface{}) (err error) {
+	if value == nil {
+		return
+	}
+
 	var element Element
 
 	switch value.(type) {

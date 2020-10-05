@@ -9,18 +9,6 @@ type Enum struct {
 	values []interface{}
 }
 
-func (el *Enum) Set(values []interface{}) {
-	el.values = values
-}
-
-func (el *Enum) Append(value interface{}) {
-	if len(el.values) == 0 {
-		el.values = make([]interface{}, 0)
-	}
-
-	el.values = append(el.values, value)
-}
-
 func (el *Enum) Verify(value interface{}) (err error) {
 	if el.values == nil {
 		return
