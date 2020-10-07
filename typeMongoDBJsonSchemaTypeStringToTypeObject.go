@@ -4,7 +4,7 @@ import (
 	"errors"
 )
 
-func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string]map[string]BsonType, key string, typeString string, schema map[string]interface{}) (err error) {
+func (el *MongoDBJsonSchema) typeStringToTypeObjectPopulated(propertiesPointer *map[string]map[string]BsonType, key string, typeString string, schema map[string]interface{}) (err error) {
 	//var newSchema map[string]interface{}
 	var objType InterfaceBson
 
@@ -76,7 +76,14 @@ func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string
 		}
 
 	//case "binData":
-	//case "objectId":
+
+	case "objectId":
+		objType = &TypeBsonObjectId{}
+		err = objType.Populate(schema)
+		if err != nil {
+			return
+		}
+
 	case "bool":
 		objType = &TypeBsonBool{}
 		err = objType.Populate(schema)
@@ -84,7 +91,13 @@ func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string
 			return
 		}
 
-	//case "date":
+	case "date":
+		objType = &TypeBsonDate{}
+		err = objType.Populate(schema)
+		if err != nil {
+			return
+		}
+
 	//case "null":
 	//case "regex":
 	//case "dbPointer":
@@ -114,7 +127,7 @@ func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string
 		}
 
 	default:
-		err = errors.New("type not implemented yet")
+		err = errors.New(typeString + ": type not implemented yet")
 	}
 
 	if (*propertiesPointer)[key] == nil {
@@ -147,7 +160,7 @@ func (el *Element) typeStringToTypeObjectPopulated(propertiesPointer *map[string
 //        "<Field Name>": <Schema Document>
 //      }
 //    }
-func (el *Element) populateRequired(key string, typeString string, schema map[string]interface{}) (err error) {
+func (el *MongoDBJsonSchema) populateRequired(key string, typeString string, schema map[string]interface{}) (err error) {
 	var newSchema map[string]interface{}
 
 	if el.Properties == nil {
@@ -200,7 +213,7 @@ func (el *Element) populateRequired(key string, typeString string, schema map[st
 	return
 }
 
-func (el *Element) populateDependencies(schema map[string]interface{}) (err error) {
+func (el *MongoDBJsonSchema) populateDependencies(schema map[string]interface{}) (err error) {
 
 	var found bool
 	_, found = schema["dependencies"]

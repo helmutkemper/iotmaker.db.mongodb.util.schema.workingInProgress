@@ -3,10 +3,12 @@ package iotmakerdbmongodbutilschema
 import (
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"io/ioutil"
 	"runtime/debug"
+	"time"
 )
 
-func _ExampleElement_UnmarshalJSON() {
+func _ExampleMongoDBJsonSchema_UnmarshalJSON() {
 
 	var jsonSchema = `
   {
@@ -690,7 +692,7 @@ func _ExampleElement_UnmarshalJSON() {
 	//`
 
 	var err error
-	var schema = Element{}
+	var schema = MongoDBJsonSchema{}
 	err = schema.UnmarshalJSON([]byte(jsonSchema))
 	if err != nil {
 		fmt.Printf("error: %v\n", err.Error())
@@ -972,7 +974,7 @@ func UnmarshalJSON0() {
   `
 
 	var err error
-	var schema = Element{}
+	var schema = MongoDBJsonSchema{}
 	err = schema.UnmarshalJSON([]byte(jsonSchema))
 	if err != nil {
 		fmt.Printf("error: %v\n", err.Error())
@@ -1052,7 +1054,7 @@ func UnmarshalJSON1() {
   }
   `
 	var err error
-	var schema = Element{}
+	var schema = MongoDBJsonSchema{}
 	err = schema.UnmarshalJSON([]byte(jsonSchema))
 	if err != nil {
 		fmt.Printf("error: %v\n", err.Error())
@@ -1110,7 +1112,7 @@ func UnmarshalJSON2() {
   }
   `
 	var err error
-	var schema = Element{}
+	var schema = MongoDBJsonSchema{}
 	err = schema.UnmarshalJSON([]byte(jsonSchema))
 	if err != nil {
 		fmt.Printf("error: %v\n", err.Error())
@@ -1137,11 +1139,51 @@ func UnmarshalJSON2() {
 	schema.VerifyErros()
 }
 
-func ExampleElement_UnmarshalJSON() {
+func UnmarshalJSON3() {
 
-	UnmarshalJSON0()
-	UnmarshalJSON1()
-	UnmarshalJSON2()
+	var err error
+	var jsonSchemaFile []byte
+	jsonSchemaFile, err = ioutil.ReadFile("./schema.json")
+	if err != nil {
+		panic(err)
+	}
+
+	var schema = MongoDBJsonSchema{}
+	err = schema.UnmarshalJSON(jsonSchemaFile)
+	if err != nil {
+		fmt.Printf("error: %v\n", err.Error())
+		debug.PrintStack()
+	}
+
+	mongoData := map[string]interface{}{
+		"_id":     primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
+		"ID":      123456,
+		"address": "rua",
+	}
+	schema.VerifyRules(mongoData)
+	schema.VerifyErros()
+
+	mongoData = map[string]interface{}{
+		"_id": primitive.ObjectID([12]byte{0x5f, 0x49, 0xa1, 0x33, 0xa8, 0xf1, 0x30, 0x21, 0x42, 0xba, 0x60, 0x69}),
+		"ID":  123456,
+		"address": map[string]interface{}{
+			"street": map[string]interface{}{
+				"name":   "Dino Sauro",
+				"number": 123,
+			},
+			"Date": time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
+		},
+	}
+	schema.VerifyRules(mongoData)
+	schema.VerifyErros()
+}
+
+func ExampleMongoDBJsonSchema_UnmarshalJSON() {
+
+	//UnmarshalJSON0()
+	//UnmarshalJSON1()
+	//UnmarshalJSON2()
+	UnmarshalJSON3()
 
 	// Output:
 	//

@@ -31,11 +31,11 @@ import "fmt"
   todo: tipos int, double, decimal, long 'Maximum' necessita de 'has set'
 */
 
-type Element struct {
+type MongoDBJsonSchema struct {
 	TypeBsonObject
 }
 
-func (el *Element) walking(key string, properties map[string]map[string]BsonType) {
+func (el *MongoDBJsonSchema) walking(key string, properties map[string]map[string]BsonType) {
 	for keyProperty, properties := range properties {
 		for dataType, rule := range properties {
 			key = key + "." + keyProperty
@@ -57,7 +57,7 @@ func (el *Element) walking(key string, properties map[string]map[string]BsonType
 	}
 }
 
-func (el *Element) VerifyErros() {
+func (el *MongoDBJsonSchema) VerifyErros() {
 	for _, err := range el.ErrorList {
 		fmt.Printf("error: %v\n", err.Error())
 	}
@@ -109,7 +109,7 @@ type _Element struct {
 	Required map[string]bool
 
 	// Properties list
-	// properties[data.key][type]Element
+	// properties[data.key][type]MongoDBJsonSchema
 	Properties map[string]map[string]BsonType
 
 	// A short title or name for the data that the schema models. This field is used for
@@ -128,7 +128,7 @@ type _Element struct {
 //
 // mountPatternPropertiesPattern (Português): Recebe o nome de todas as chaves contidas no
 // objeto e popula as regras por expressão regular a partir de PatternProperties
-func (el *Element) mountPatternPropertiesPattern(keyList []string) {
+func (el *MongoDBJsonSchema) mountPatternPropertiesPattern(keyList []string) {
 	if len(keyList) == 0 {
 		return
 	}
@@ -138,7 +138,7 @@ func (el *Element) mountPatternPropertiesPattern(keyList []string) {
 	  }
 
 	  var err error
-	  var propertyList []Element
+	  var propertyList []MongoDBJsonSchema
 	  for _, keyValue := range keyList {
 	    for _, pattern := range el.PatternProperties {
 	      propertyList, err = pattern.GetMatch(keyValue)

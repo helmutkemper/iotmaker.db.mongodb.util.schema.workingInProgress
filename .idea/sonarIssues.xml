@@ -18,6 +18,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/dateLayout.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/debug.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/schema.json">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/typeAdditionalProperties.go">
           <value>
             <set />
@@ -73,6 +88,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/typeMongoDBJsonSchemaUnmarshalJSON_test.go">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/typePatternProperties.go">
           <value>
             <set />
@@ -84,6 +104,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/typeTypeBsonBool.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonDate.go">
           <value>
             <set />
           </value>
@@ -114,6 +139,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/typeTypeBsonObject.go">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/typeTypeBsonObjectId.go">
           <value>
             <set />
           </value>

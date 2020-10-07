@@ -5,7 +5,7 @@ package iotmakerdbmongodbutilschema
 //
 // filterSchemaElements (Português): Varre o dado em busca das chaves 'validator' e
 // '$jsonSchema' para montar o mapa de dados.
-func (el *Element) filterSchemaElements(schema map[string]interface{}) map[string]interface{} {
+func (el *MongoDBJsonSchema) filterSchemaElements(schema map[string]interface{}) map[string]interface{} {
 	var found bool
 	_, found = schema["validator"]
 	if found == true {

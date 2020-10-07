@@ -199,8 +199,14 @@ func (el *TypeBsonObject) VerifyRules(value interface{}) {
 	var found bool
 
 	for key, properties := range el.Properties {
-
 		for dataType, rule := range properties {
+
+			// (English): this occurs for types not implemented
+			//
+			// (Português): isto ocorre para tipos não implementados
+			if rule.ElementType == nil {
+				continue
+			}
 
 			if dataType == "object" {
 				switch converted := value.(type) {
@@ -414,7 +420,14 @@ func (el *TypeBsonObject) typeStringToTypeObjectPopulated(propertiesPointer *map
 		}
 
 	//case "binData":
-	//case "objectId":
+
+	case "objectId":
+		objType = &TypeBsonObjectId{}
+		err = objType.Populate(schema)
+		if err != nil {
+			return
+		}
+
 	case "bool":
 		objType = &TypeBsonBool{}
 		err = objType.Populate(schema)
@@ -422,8 +435,14 @@ func (el *TypeBsonObject) typeStringToTypeObjectPopulated(propertiesPointer *map
 			return
 		}
 
-	//case "date":
-	//case "null":
+	case "date":
+		objType = &TypeBsonDate{}
+		err = objType.Populate(schema)
+		if err != nil {
+			return
+		}
+
+		//case "null":
 	//case "regex":
 	//case "dbPointer":
 	//case "javascript":
@@ -452,7 +471,7 @@ func (el *TypeBsonObject) typeStringToTypeObjectPopulated(propertiesPointer *map
 		}
 
 	default:
-		err = errors.New("type not implemented yet")
+		err = errors.New(typeString + ": type not implemented yet")
 	}
 
 	if (*propertiesPointer)[key] == nil {

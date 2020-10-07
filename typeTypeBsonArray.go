@@ -152,7 +152,7 @@ func (el *TypeBsonArray) verifyItems(value interface{}) (err error) {
 		return
 	}
 
-	var element Element
+	var element MongoDBJsonSchema
 
 	switch value.(type) {
 	case []map[string]interface{}:
@@ -226,7 +226,7 @@ func (el *TypeBsonArray) PopulateItens(schema map[string]interface{}) (items map
 	var key string
 	var newSchemaMap = make(map[string]interface{})
 	var newSchemaArray = make([]interface{}, 0)
-	var element Element
+	var element MongoDBJsonSchema
 
 	switch schema["items"].(type) {
 	case []interface{}:
@@ -330,7 +330,7 @@ func (el *TypeBsonArray) getPropertyAdditionalItens(schema map[string]interface{
 		boolIsSet = false
 
 		var newSchemaMap = make(map[string]interface{})
-		var element Element
+		var element MongoDBJsonSchema
 		var key string
 		newSchemaMap = element.filterSchemaElements(schema["additionalProperties"].(map[string]interface{})["items"].(map[string]interface{}))
 		newSchemaMap, found = newSchemaMap["properties"].(map[string]interface{})

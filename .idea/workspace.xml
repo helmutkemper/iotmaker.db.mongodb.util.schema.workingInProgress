@@ -11,29 +11,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d6e0d50-2c5a-442d-bdf5-2fcdd2a61edc" name="Default Changelist" comment="testing">
+      <change afterPath="$PROJECT_DIR$/1-50.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/101-150.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/51-100.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dateLayout.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/typeTypeBsonDate.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/typeTypeBsonObjectId.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElement.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeElement.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElementGetPropertyDescription.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElementGetPropertyRequired.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElementGetPropertyTitle.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElementPopulateType.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeElementUnmarshalJSON_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeElementUnmarshalJSON_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeEnum.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeEnum.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_typeElementAppendType.go" beforeDir="false" afterPath="$PROJECT_DIR$/_typeElementAppendType.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElement.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchema.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElementGetPropertyType.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchemaGetPropertyType.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElementGetSchemaElements.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchemaGetSchemaElements.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElementTypeStringToTypeObject.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchemaTypeStringToTypeObject.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElementUnmarshalJSON.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchemaUnmarshalJSON.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeElementUnmarshalJSON_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeMongoDBJsonSchemaUnmarshalJSON_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typePatternProperties.go" beforeDir="false" afterPath="$PROJECT_DIR$/typePatternProperties.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typeTypeBsonArray.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonArray.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonBool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonDecimal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonDouble.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonInt.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonInt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonLong.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonLong.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typeTypeBsonGeneric.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonGeneric.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/typeTypeBsonObject.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonObject.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonObjectVerifyMinProperties.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonObjectVerifyMinProperties.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typeTypeBsonString.go" beforeDir="false" afterPath="$PROJECT_DIR$/typeTypeBsonString.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" path="C:\Users\helmut.kemper.CS\go\go1.14.3" />
   <component name="Git.Settings">
@@ -49,6 +59,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
@@ -67,12 +78,15 @@
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\helmut.kemper.CS\GolandProjects\Libraries\src\github.com\helmutkemper\iotmaker.db.mongodb.util.schema.workingInProgress" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\helmut.kemper.CS\Desktop\iotmaker.db.mongodb.util.schema.workingInProgress" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (2)">
-    <configuration name="ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="ExampleMongoDBJsonSchema_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="iotmaker.db.mongodb.util.schema.workingInProgress" />
       <working_directory value="$PROJECT_DIR$" />
       <framework value="gotest" />
@@ -80,60 +94,12 @@
       <package value="github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QExampleElement_UnmarshalJSON\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QExampleElement_UnmarshalJSON\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ExampleElement_UnmarshalJSON_object_1 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QExampleElement_UnmarshalJSON_object_1\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ExampleElement_UnmarshalJSON_object_1 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QExampleElement_UnmarshalJSON_object_1\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ExampleElement_UnmarshalJSON_object_2 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QExampleElement_UnmarshalJSON_object_2\E$" />
+      <pattern value="^\QExampleMongoDBJsonSchema_UnmarshalJSON\E$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (2)" />
-        <item itemvalue="Go Test.ExampleElement_UnmarshalJSON_object_1 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (1)" />
-        <item itemvalue="Go Test.ExampleElement_UnmarshalJSON_object_2 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-        <item itemvalue="Go Test.ExampleElement_UnmarshalJSON_object_1 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
-        <item itemvalue="Go Test.ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (1)" />
+        <item itemvalue="Go Test.ExampleMongoDBJsonSchema_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress" />
       </list>
     </recent_temporary>
   </component>
@@ -161,54 +127,58 @@
     <option name="LAST_COMMIT_MESSAGE" value="testing" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1170" height="466" key="DebuggerActiveHint" timestamp="1601918204467">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602008432432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1170" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1601918204467" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1602008432432" />
+    <state width="1170" height="466" key="DebuggerActiveHint" timestamp="1602008949134">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1170" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1602008949134" />
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1601855861929">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1601855861929" />
-    <state width="1323" height="197" key="GridCell.Tab.0.bottom" timestamp="1601928442372">
+    <state width="1323" height="189" key="GridCell.Tab.0.bottom" timestamp="1602018584048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="197" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601928442372" />
-    <state width="1323" height="197" key="GridCell.Tab.0.center" timestamp="1601928442371">
+    <state width="1323" height="189" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1602018584048" />
+    <state width="1323" height="189" key="GridCell.Tab.0.center" timestamp="1602018584047">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="197" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1601928442371" />
-    <state width="1323" height="197" key="GridCell.Tab.0.left" timestamp="1601928442370">
+    <state width="1323" height="189" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1602018584047" />
+    <state width="1323" height="189" key="GridCell.Tab.0.left" timestamp="1602018584047">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="197" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1601928442370" />
-    <state width="1323" height="197" key="GridCell.Tab.0.right" timestamp="1601928442371">
+    <state width="1323" height="189" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1602018584047" />
+    <state width="1323" height="189" key="GridCell.Tab.0.right" timestamp="1602018584047">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="197" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1601928442371" />
-    <state width="1323" height="189" key="GridCell.Tab.1.bottom" timestamp="1601927660675">
+    <state width="1323" height="189" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1602018584047" />
+    <state width="1323" height="189" key="GridCell.Tab.1.bottom" timestamp="1602018584048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="189" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1601927660675" />
-    <state width="1323" height="189" key="GridCell.Tab.1.center" timestamp="1601927660675">
+    <state width="1323" height="189" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1602018584048" />
+    <state width="1323" height="189" key="GridCell.Tab.1.center" timestamp="1602018584048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="189" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1601927660675" />
-    <state width="1323" height="189" key="GridCell.Tab.1.left" timestamp="1601927660675">
+    <state width="1323" height="189" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1602018584048" />
+    <state width="1323" height="189" key="GridCell.Tab.1.left" timestamp="1602018584048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="189" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1601927660675" />
-    <state width="1323" height="189" key="GridCell.Tab.1.right" timestamp="1601927660675">
+    <state width="1323" height="189" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1602018584048" />
+    <state width="1323" height="189" key="GridCell.Tab.1.right" timestamp="1602018584048">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="189" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1601927660675" />
+    <state width="1323" height="189" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1602018584048" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1601169746994">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1601169746994" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601855981080">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1601939094481">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601855981080" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1601939094481" />
     <state x="462" y="202" key="com.goide.refactor.move.GoMoveDeclarationDialog" timestamp="1601321922695">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -225,17 +195,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1601772865808" />
-    <state x="19" y="17" width="1313" height="626" key="find.popup" timestamp="1601909329164">
+    <state x="19" y="17" width="1313" height="626" key="find.popup" timestamp="1601988707184">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="19" y="17" width="1313" height="626" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601909329164" />
+    <state x="19" y="17" width="1313" height="626" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1601988707184" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/typeElementTypeStringToTypeObject.go</url>
-          <line>160</line>
+          <url>file://$PROJECT_DIR$/typeMongoDBJsonSchemaTypeStringToTypeObject.go</url>
+          <line>173</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -244,8 +214,8 @@
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/typeElementUnmarshalJSON_test.go</url>
-          <line>729</line>
+          <url>file://$PROJECT_DIR$/typeMongoDBJsonSchemaUnmarshalJSON_test.go</url>
+          <line>721</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -253,11 +223,26 @@
           <line>47</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/typeMongoDBJsonSchemaUnmarshalJSON_test.go</url>
+          <line>1162</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/typeTypeBsonObject.go</url>
+          <line>207</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/typeTypeBsonObjectId.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iotmaker_db_mongodb_util_schema_workingInProgress$ExampleElement_UnmarshalJSON_in_github_com_helmutkemper_iotmaker_db_mongodb_util_schema_workingInProgress__2_.out" NAME="ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (2) Coverage Results" MODIFIED="1601928442078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/iotmaker_db_mongodb_util_schema_workingInProgress$ExampleElement_UnmarshalJSON_in_github_com_helmutkemper_iotmaker_db_mongodb_util_schema_workingInProgress__2_.out" NAME="ExampleElement_UnmarshalJSON in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress (2) Coverage Results" MODIFIED="1601987962042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/iotmaker_db_mongodb_util_schema_workingInProgress$ExampleElement_UnmarshalJSON_object_2_in_github_com_helmutkemper_iotmaker_db_mongodb_util_schema_workingInProgress.out" NAME="ExampleElement_UnmarshalJSON_object_2 in github.com/helmutkemper/iotmaker.db.mongodb.util.schema.workingInProgress Coverage Results" MODIFIED="1601901028231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

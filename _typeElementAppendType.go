@@ -1,6 +1,6 @@
 package iotmakerdbmongodbutilschema
 
-func (el Element) AppendType(value interface{}) (err error) {
+func (el MongoDBJsonSchema) AppendType(value interface{}) (err error) {
 	if len(el.Type) == 0 {
 		el.Type = make([]BsonType, 0)
 	}

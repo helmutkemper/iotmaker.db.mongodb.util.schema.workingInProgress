@@ -532,6 +532,24 @@ func (el *TypeBsonCommonToAllTypes) getPropertyTitle(schema map[string]interface
 	return
 }
 
+func (el *TypeBsonCommonToAllTypes) getPropertyString(schema map[string]interface{}, key string) (text string, err error) {
+	var value interface{}
+	var found bool
+
+	value, found = schema[key]
+	if found == false {
+		return
+	}
+
+	if reflect.ValueOf(value).Kind() != reflect.String {
+		err = errors.New("'title' key must be a string")
+		return
+	}
+
+	text = value.(string)
+	return
+}
+
 func (el *TypeBsonCommonToAllTypes) getPropertyDescription(schema map[string]interface{}) (description string, err error) {
 	var value interface{}
 	var found bool

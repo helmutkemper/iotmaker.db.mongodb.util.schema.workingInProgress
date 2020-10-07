@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-func (el *Element) getPropertyBsonType(schema map[string]interface{}) (value []string, err error) {
+func (el *MongoDBJsonSchema) getPropertyBsonType(schema map[string]interface{}) (value []string, err error) {
 
 	value = make([]string, 0)
 

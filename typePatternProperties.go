@@ -10,15 +10,15 @@ import (
 // PatternProperties (Português):
 type PatternProperties struct {
 	regexp     *regexp.Regexp
-	properties []Element
+	properties []MongoDBJsonSchema
 }
 
 // AppendProperty (English): Add a new property
 //
 // AppendProperty (Português): Adiciona uma nova propriedade
-func (el *PatternProperties) AppendProperty(property Element) {
+func (el *PatternProperties) AppendProperty(property MongoDBJsonSchema) {
 	if len(el.properties) == 0 {
-		el.properties = make([]Element, 0)
+		el.properties = make([]MongoDBJsonSchema, 0)
 	}
 
 	el.properties = append(el.properties, property)
@@ -43,12 +43,12 @@ func (el *PatternProperties) SetRegexpPOSIX(value string) (err error) {
 // GetMatch (English): Returns a list of properties for the given key
 //
 // GetMatch (Português): Retorna a de propriedades para uma determinada chave
-func (el *PatternProperties) GetMatch(value string) (propertiesList []Element, err error) {
-	propertiesList = make([]Element, 0)
+func (el *PatternProperties) GetMatch(value string) (propertiesList []MongoDBJsonSchema, err error) {
+	propertiesList = make([]MongoDBJsonSchema, 0)
 
 	if el.regexp.MatchString(value) == true {
 		if len(el.properties) == 0 {
-			el.properties = make([]Element, 0)
+			el.properties = make([]MongoDBJsonSchema, 0)
 		}
 		propertiesList = el.properties
 		return

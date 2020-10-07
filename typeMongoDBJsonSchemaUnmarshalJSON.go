@@ -7,7 +7,7 @@ import (
 	"reflect"
 )
 
-func (el *Element) UnmarshalJSON(data []byte) (err error) {
+func (el *MongoDBJsonSchema) UnmarshalJSON(data []byte) (err error) {
 	var schema = make(map[string]interface{})
 
 	err = json.Unmarshal(data, &schema)
@@ -35,14 +35,14 @@ func (el *Element) UnmarshalJSON(data []byte) (err error) {
 	return
 }
 
-//func (el *Element) VerifyDocument(document map[string]interface{}) {
+//func (el *MongoDBJsonSchema) VerifyDocument(document map[string]interface{}) {
 //	if el.ErrorList == nil {
 //	  el.ErrorList = make([]error, 0)
 //  }
 //  _ = el.VerifyDocumentByProperties(&el.Properties, document)
 //}
 
-func (el *Element) VerifyDocumentByProperties(propertiesPointer *map[string]map[string]BsonType, document map[string]interface{}) (err error) {
+func (el *MongoDBJsonSchema) VerifyDocumentByProperties(propertiesPointer *map[string]map[string]BsonType, document map[string]interface{}) (err error) {
 
 	var found bool
 	var properties map[string]BsonType
@@ -138,7 +138,7 @@ func (el *Element) VerifyDocumentByProperties(propertiesPointer *map[string]map[
 // data
 //
 // getRules (Português): Retorna a regra específica da chave contida no dado do MongoDB
-func (el *Element) getRules(propertiesPointer *map[string]map[string]BsonType, key string) (found bool, properties map[string]BsonType) {
+func (el *MongoDBJsonSchema) getRules(propertiesPointer *map[string]map[string]BsonType, key string) (found bool, properties map[string]BsonType) {
 	properties, found = (*propertiesPointer)[key]
 	return
 }
